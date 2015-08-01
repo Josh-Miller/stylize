@@ -4,19 +4,37 @@
   "description": "CLI for Stylize",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha ./tests/index"
   },
-  "author": "Josh Miller",
+  "author": {
+    "name": "Josh Miller",
+    "email": "josh@josh-miller.me",
+    "url": "http://josh-miller.me/"
+  },
   "license": "GPL-3.0",
+  "keywords": [
+    "styleguide",
+    "pattern",
+    "stylize",
+    "cli"
+  ],
+  "repository": "Josh-Miller/stylize-cli",
   "bin": {
     "stylize": "index.js"
   },
   "dependencies": {
+    "broccoli": "^0.16.5",
     "chalk": "^1.1.0",
     "chokidar": "^1.0.5",
     "commander": "^2.8.1",
     "fs-extra": "^0.22.1",
     "lodash": "^3.10.0",
-    "stylize": "^0.0.0"
+    "stylize": "^0.0.0",
+    "generator-stylize-app": "^0.0.0",
+    "yeoman-environment": "^1.2.7"
+  },
+  "devDependencies": {
+    "chai": "^3.2.0",
+    "mocha": "^2.2.5"
   }
 }

@@ -11,7 +11,8 @@ var program = require('commander'),
 
 // CLI
 var cliPatterns = require('./lib/patterns'),
-    cliExport = require('./lib/export');
+    cliExport = require('./lib/export'),
+    cliInit = require('./lib/init');
     // cliBuild = require('./lib/frontEnd');
     // cliBuild = require('./lib/build');
 var log = console.log.bind(console);
@@ -19,8 +20,6 @@ var log = console.log.bind(console);
 program
   .version('0.0.1')
   .option('-b, --build', 'Build app')
-  .option('-p, --patterns', 'Compile patterns')
-  .option('-w, --watch', 'Watch and compile patterns on change')
   .option('-e, --export', 'Export patterns');
 
 program
@@ -28,6 +27,24 @@ program
   .description('Builds a new instance of Stylize')
   .action(function() {
     log(chalk.green('Initializing new Stylize project...'));
+    cliInit.run();
+  });
+
+program
+  .command('compile [env]')
+  .description('Compile patterns')
+  .option('-w, --watch', 'Watch and compile patterns on change')
+  .action(function() {
+    cliPatterns.run(function() {
+      log(chalk.green('Fin'));
+    });
+  });
+
+program
+  .command('build [env]')
+  .description('Build Stylize app')
+  .action(function() {
+    // cliBuild.run();
   });
 
 program.parse(process.argv);
@@ -35,7 +52,9 @@ program.parse(process.argv);
 
 // Compile patterns
 if (program.patterns) {
-  cliPatterns.run();
+  cliPatterns.run(function() {
+    log(chalk.green('Fin'));
+  });
 }
 
 
@@ -54,7 +73,8 @@ if (program.export) {
 // Watch patterns
 if (program.watch) {
   log(chalk.green('Watching'));
-  var watcher = chokidar.watch(__dirname + '/src', {
+  var path = process.cwd();
+  var watcher = chokidar.watch(path + '/src', {
     usePolling: true,
     persistent: true,
     ignored: /[\/\\]\./,
@@ -66,7 +86,7 @@ if (program.watch) {
   });
 
   watcher.on('add', function(path, stats) {
-    cliBuild.run();
+    // cliBuild.run();
     cliPatterns.run();
     log(chalk.green('Added', path));
   });
