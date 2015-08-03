@@ -16,7 +16,7 @@ To create a new Stylize project run `stylize init`.
 ```
 $ stylize compile
 ```
-** Options: **
+**Options:**
 * --watch, -w -- Watches for file changes and recompiles on change and add.
 
 #### Initialize a new Sylize project

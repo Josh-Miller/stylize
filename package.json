@@ -28,8 +28,8 @@
     "commander": "^2.8.1",
     "fs-extra": "^0.22.1",
     "lodash": "^3.10.0",
-    "stylize": "^0.0.0",
-    "generator-stylize-app": "^0.0.0",
+    "stylize": "https://github.com/Josh-Miller/stylize",
+    "generator-stylize": "https://github.com/Josh-Miller/generator-stylize",
     "yeoman-environment": "^1.2.7"
   },
   "devDependencies": {

@@ -33,6 +33,7 @@ program
 
 program
   .command('compile [env]')
+  .alias('c')
   .description('Compile patterns')
   .option('-w, --watch', 'Watch and compile patterns on change')
   .action(function() {
@@ -43,6 +44,7 @@ program
 
 program
   .command('build [env]')
+  .alias('b')
   .description('Build Stylize app')
   .action(function() {
     cliBuild.run();
