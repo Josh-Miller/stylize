@@ -12,9 +12,10 @@ var program = require('commander'),
 // CLI
 var cliPatterns = require('./lib/patterns'),
     cliExport = require('./lib/export'),
-    cliInit = require('./lib/init');
+    cliInit = require('./lib/init'),
+    cliBuild = require('./lib/build');
     // cliBuild = require('./lib/frontEnd');
-    // cliBuild = require('./lib/build');
+
 var log = console.log.bind(console);
 
 program
@@ -44,7 +45,7 @@ program
   .command('build [env]')
   .description('Build Stylize app')
   .action(function() {
-    // cliBuild.run();
+    cliBuild.run();
   });
 
 program.parse(process.argv);
@@ -86,7 +87,7 @@ if (program.watch) {
   });
 
   watcher.on('add', function(path, stats) {
-    // cliBuild.run();
+    cliBuild.run();
     cliPatterns.run();
     log(chalk.green('Added', path));
   });
