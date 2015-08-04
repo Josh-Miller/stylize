@@ -6,13 +6,13 @@ chai.should();
 describe('Stylize CLI', function () {
   describe('compile', function() {
     it('should run compile',function(){
-      var cliPatterns = require('../lib/patterns');
+      var cliCompile = require('../lib/compile');
 
-      cliPatterns.run(function() {
+      cliCompile.run(function() {
         log(chalk.green('Fin'));
       });
 
-      expect(cliPatterns.run).to.not.throw(Error);
+      expect(cliCompile.run).to.not.throw(Error);
     });
   });
 

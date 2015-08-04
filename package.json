@@ -30,6 +30,7 @@
     "lodash": "^3.10.0",
     "stylize": "https://github.com/Josh-Miller/stylize",
     "generator-stylize": "https://github.com/Josh-Miller/generator-stylize",
+    "stylizer-front-end": "https://github.com/AtenDesignGroup/stylizer-front-end",
     "yeoman-environment": "^1.2.7"
   },
   "devDependencies": {

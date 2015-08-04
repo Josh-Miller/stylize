@@ -10,7 +10,7 @@ var program = require('commander'),
     chalk = require('chalk');
 
 // CLI
-var cliPatterns = require('./lib/patterns'),
+var cliCompile = require('./lib/compile'),
     cliExport = require('./lib/export'),
     cliInit = require('./lib/init'),
     cliBuild = require('./lib/build');
@@ -37,7 +37,7 @@ program
   .description('Compile patterns')
   .option('-w, --watch', 'Watch and compile patterns on change')
   .action(function() {
-    cliPatterns.run(function() {
+    cliCompile.run(function() {
       log(chalk.green('Fin'));
     });
   });
@@ -55,7 +55,7 @@ program.parse(process.argv);
 
 // Compile patterns
 if (program.patterns) {
-  cliPatterns.run(function() {
+  cliCompile.run(function() {
     log(chalk.green('Fin'));
   });
 }
@@ -84,13 +84,13 @@ if (program.watch) {
   });
 
   watcher.on('change', function(path, stats) {
-    cliPatterns.run();
+    cliCompile.run();
     log(chalk.green('Updated', path));
   });
 
   watcher.on('add', function(path, stats) {
     cliBuild.run();
-    cliPatterns.run();
+    cliCompile.run();
     log(chalk.green('Added', path));
   });
 }
