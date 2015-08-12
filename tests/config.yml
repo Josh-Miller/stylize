@@ -1,0 +1,18 @@
+footerPath: 'src/partials/footer.hbs'
+headerPath: 'src/partials/head.hbs'
+patternsRoot: 'src/patterns'
+
+destination: '/public/patterns'
+data: '/src/data/data.yml'
+exportData: '/src/data/drupal.yml'
+exportDestination: '/export/patterns'
+
+plugins:
+  # stylize-handlebars:
+  stylize-mustache:
+  # stylizer.getPatterns:
+  # stylizer.patternData:
+  # stylize-drupalexport:
+  # sassColors/sassColors:
+  #   settings:
+  #     file: './_colors.scss'

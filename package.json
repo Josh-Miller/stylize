@@ -27,9 +27,10 @@
     "chokidar": "^1.0.5",
     "commander": "^2.8.1",
     "fs-extra": "^0.22.1",
+    "generator-stylize": "https://github.com/Josh-Miller/generator-stylize",
+    "gulp": "^3.9.0",
     "lodash": "^3.10.0",
     "stylize": "https://github.com/Josh-Miller/stylize",
-    "generator-stylize": "https://github.com/Josh-Miller/generator-stylize",
     "stylizer-front-end": "https://github.com/AtenDesignGroup/stylizer-front-end",
     "yeoman-environment": "^1.2.7"
   },

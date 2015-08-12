@@ -7,6 +7,7 @@ var program = require('commander'),
     fs = require('fs-extra'),
     chokidar = require('chokidar'),
     childProcess = require('child_process'),
+    stylizeRegression = require('stylize-regression'),
     chalk = require('chalk');
 
 // CLI
@@ -47,7 +48,19 @@ program
   .alias('b')
   .description('Build Stylize app')
   .action(function() {
+    var path = process.cwd();
     cliBuild.run();
+  });
+
+program
+  .command('regression [env]')
+  .alias('r')
+  .description('Run regression test')
+  .action(function() {
+
+    stylizeRegression.get(function(patterns) {
+      console.log(patterns);
+    });
   });
 
 program.parse(process.argv);
