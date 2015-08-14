@@ -10,12 +10,37 @@ var program = require('commander'),
     stylizeRegression = require('stylize-regression'),
     chalk = require('chalk');
 
+// Watch patterns
+var watch = function() {
+  log(chalk.green('Watching'));
+  var path = process.cwd();
+  var watcher = chokidar.watch(path + '/src', {
+    usePolling: true,
+    persistent: true,
+    ignored: /[\/\\]\./,
+  });
+
+  watcher.on('change', function(path, stats) {
+    cliCompile.run(function() {
+      log(chalk.green('Fin'));
+    });
+    log(chalk.cyan('Updated', path));
+  });
+
+  watcher.on('add', function(path, stats) {
+    cliBuild.run();
+    cliCompile.run(function() {
+      log(chalk.green('Fin'));
+    });
+    log(chalk.cyan('Added', path));
+  });
+}
+
 // CLI
 var cliCompile = require('./lib/compile'),
     cliExport = require('./lib/export'),
     cliInit = require('./lib/init'),
     cliBuild = require('./lib/build');
-    // cliBuild = require('./lib/frontEnd');
 
 var log = console.log.bind(console);
 
@@ -37,10 +62,16 @@ program
   .alias('c')
   .description('Compile patterns')
   .option('-w, --watch', 'Watch and compile patterns on change')
-  .action(function() {
-    cliCompile.run(function() {
-      log(chalk.green('Fin'));
-    });
+  .action(function(env, options) {
+    var mode = options.watch || false;
+
+    if (mode) {
+      watch();
+    } else {
+      cliCompile.run(function() {
+        log(chalk.green('Fin'));
+      });
+    }
   });
 
 program
@@ -59,7 +90,7 @@ program
   .action(function() {
 
     stylizeRegression.get(function(patterns) {
-      console.log(patterns);
+      stylizeRegression.takeScreenshot(patterns);
     });
   });
 
@@ -84,26 +115,4 @@ if (program.build) {
 // Export app
 if (program.export) {
   cliExport.run();
-}
-
-// Watch patterns
-if (program.watch) {
-  log(chalk.green('Watching'));
-  var path = process.cwd();
-  var watcher = chokidar.watch(path + '/src', {
-    usePolling: true,
-    persistent: true,
-    ignored: /[\/\\]\./,
-  });
-
-  watcher.on('change', function(path, stats) {
-    cliCompile.run();
-    log(chalk.green('Updated', path));
-  });
-
-  watcher.on('add', function(path, stats) {
-    cliBuild.run();
-    cliCompile.run();
-    log(chalk.green('Added', path));
-  });
 }
