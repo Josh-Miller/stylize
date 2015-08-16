@@ -1,7 +1,7 @@
 {
-  "name": "stylize-cli",
+  "name": "stylize",
   "version": "0.0.0",
-  "description": "CLI for Stylize",
+  "description": "Stylize styleguide framework",
   "main": "index.js",
   "scripts": {
     "test": "mocha ./tests/index"
@@ -18,7 +18,7 @@
     "stylize",
     "cli"
   ],
-  "repository": "Josh-Miller/stylize-cli",
+  "repository": "Josh-Miller/stylize",
   "bin": {
     "stylize": "index.js"
   },
@@ -30,9 +30,10 @@
     "generator-stylize": "https://github.com/Josh-Miller/generator-stylize",
     "gulp": "^3.9.0",
     "lodash": "^3.10.0",
-    "stylize": "https://github.com/Josh-Miller/stylize",
+    "stylize-core": "https://github.com/Josh-Miller/stylize-core",
     "stylizer-front-end": "https://github.com/AtenDesignGroup/stylizer-front-end",
-    "yeoman-environment": "^1.2.7"
+    "yeoman-environment": "^1.2.7",
+    "stylize-regression": "^0.0.0"
   },
   "devDependencies": {
     "chai": "^3.2.0",

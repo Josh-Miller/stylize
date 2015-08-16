@@ -88,7 +88,7 @@ program
   .alias('r')
   .description('Run regression test')
   .action(function() {
-
+    var path = process.cwd();
     stylizeRegression.get(function(patterns) {
       stylizeRegression.takeScreenshot(patterns);
     });
@@ -97,13 +97,7 @@ program
 program.parse(process.argv);
 
 
-// Compile patterns
-if (program.patterns) {
-  cliCompile.run(function() {
-    log(chalk.green('Fin'));
-  });
-}
-
+// LEGACY
 
 // Build app
 if (program.build) {
