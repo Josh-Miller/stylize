@@ -1,10 +1,10 @@
-# Stylize CLI
+# Stylize
 
-CLI for [Stylize](https://github.com/Josh-Miller/stylize) pattern framework
+Stylize pattern framework
 
 ## Getting Started
 ```
-$ npm i stylize-cli -g
+$ npm i stylize -g
 ```
 
 To create a new Stylize project run `stylize init`.
@@ -24,3 +24,8 @@ $ stylize compile
 $ stylize init
 ```
 
+#### Regression testing
+```
+$ stylize regression
+```
+Runs visual regression testing on all patterns.
