@@ -21,10 +21,10 @@ var watch = function() {
   });
 
   watcher.on('change', function(path, stats) {
-    cliCompile.run(function() {
-      log(chalk.green('Fin'));
+
+    cliCompile.singlePattern(path, function(fileName) {
+      log(chalk.cyan('Updated', fileName));
     });
-    log(chalk.cyan('Updated', path));
   });
 
   watcher.on('add', function(path, stats) {
