@@ -94,19 +94,14 @@ program
     });
   });
 
+program
+  .command('export [env]')
+  .alias('e')
+  .description('Export patterns')
+  .action(function() {
+    cliExport.run(function() {
+      log(chalk.green('Fin'));
+    });
+  });
+
 program.parse(process.argv);
-
-
-// LEGACY
-
-// Build app
-if (program.build) {
-  // To run the gulp command of front end
-  // childProcess.exec('cd ./core/front_end && gulp');
-  cliBuild.run();
-}
-
-// Export app
-if (program.export) {
-  cliExport.run();
-}
