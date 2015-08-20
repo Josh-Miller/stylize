@@ -2,7 +2,7 @@ footerPath: 'src/partials/footer.hbs'
 headerPath: 'src/partials/head.hbs'
 patternsRoot: 'src/patterns'
 
-destination: '/public/patterns'
+destination: '/public'
 data: '/src/data/data.yml'
 exportData: '/src/data/drupal.yml'
 exportDestination: '/export/patterns'
