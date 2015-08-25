@@ -10,6 +10,14 @@ var program = require('commander'),
     stylizeRegression = require('stylize-regression'),
     chalk = require('chalk');
 
+// CLI
+var cliCompile = require('./lib/compile'),
+    cliExport = require('./lib/export'),
+    cliInit = require('./lib/init'),
+    cliBuild = require('./lib/build');
+
+var log = console.log.bind(console);
+
 // Watch patterns
 var watch = function() {
   log(chalk.green('Watching'));
@@ -20,29 +28,34 @@ var watch = function() {
     ignored: /[\/\\]\./,
   });
 
-  watcher.on('change', function(path, stats) {
+  cliCompile.run(function() {
+    log(chalk.green('Fin'));
+  });
 
-    cliCompile.singlePattern(path, function(fileName) {
-      log(chalk.cyan('Updated', fileName));
-    });
+  watcher.on('change', function(path, stats) {
+    var pathArr = path.split('/');
+    var fileArr = pathArr[pathArr.length - 1].split('.');
+    var fileSuffix = fileArr[fileArr.length - 1];
+
+    if (fileSuffix === 'yml') {
+      console.log(chalk.cyan('Updated', fileArr));
+      cliCompile.run(function() {
+        log(chalk.green('Fin'));
+      });
+    } else {
+      cliCompile.singlePattern(path, function(fileName) {
+        log(chalk.cyan('Updated', fileName));
+      });
+    }
+
   });
 
   watcher.on('add', function(path, stats) {
-    cliBuild.run();
-    cliCompile.run(function() {
-      log(chalk.green('Fin'));
+    cliCompile.singlePattern(path, function(fileName) {
+      log(chalk.cyan('Added', fileName));
     });
-    log(chalk.cyan('Added', path));
   });
 }
-
-// CLI
-var cliCompile = require('./lib/compile'),
-    cliExport = require('./lib/export'),
-    cliInit = require('./lib/init'),
-    cliBuild = require('./lib/build');
-
-var log = console.log.bind(console);
 
 program
   .version('0.0.1')
