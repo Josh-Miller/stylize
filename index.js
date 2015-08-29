@@ -17,6 +17,7 @@ var cliCompile = require('./lib/compile'),
     cliBuild = require('./lib/build');
 
 var log = console.log.bind(console);
+var cmdPath = process.cwd();
 
 // Watch patterns
 var watch = function() {
@@ -58,9 +59,7 @@ var watch = function() {
 }
 
 program
-  .version('0.0.1')
-  .option('-b, --build', 'Build app')
-  .option('-e, --export', 'Export patterns');
+  .version('0.0.1');
 
 program
   .command('init [env]')
@@ -81,7 +80,7 @@ program
     if (mode) {
       watch();
     } else {
-      cliCompile.run(function() {
+      cliCompile.run(cmdPath, function() {
         log(chalk.green('Fin'));
       });
     }
@@ -101,8 +100,8 @@ program
   .alias('r')
   .description('Run regression test')
   .action(function() {
-    var path = process.cwd();
-    stylizeRegression.get(function(patterns) {
+    var cmdPath = process.cwd();
+    stylizeRegression.get(cmdPath, function(patterns) {
       stylizeRegression.takeScreenshot(patterns);
     });
   });
@@ -112,7 +111,7 @@ program
   .alias('e')
   .description('Export patterns')
   .action(function() {
-    cliExport.run(function() {
+    cliExport.run(cmdPath, function() {
       log(chalk.green('Fin'));
     });
   });

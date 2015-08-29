@@ -1,0 +1,35 @@
+node:
+  header: >
+    <?php
+
+    /**
+     * @file
+     * page  theme implementation to display a node.
+     */
+
+    ?>
+  devDeets: <?php print $dev_deets; ?>
+  nid: <?php print $node->nid; ?>
+  classes: <?php print $classes; ?>
+  attributes: <?php print $attributes; ?>
+  userPicture: <?php print $user_picture; ?>
+  titlePrefix: <?php print render($title_prefix); ?>
+  ifPage: '<?php if (!$page): ?>'
+  endif: <?php endif; ?>
+  titleAttributes: <?php print $title_attributes; ?>
+  nodeUrl: <?php print $node_url; ?>
+  title: <?php print $title; ?>
+  titleSuffix: <?php print render($title_suffix); ?>
+  ifSubmitted: '<?php if ($display_submitted): ?>'
+  submitted: <?php print $submitted; ?>
+  contentAttributes: <?php print $content_attributes; ?>
+  content: >
+    <?php
+      // We hide the comments and links now so that we can render them later.
+      hide($content['comments']);
+      hide($content['links']);
+      print render($content);
+    ?>
+  links: "<?php print render($content['links']); ?>"
+  comments: "<?php print render($content['comments']); ?>"
+
