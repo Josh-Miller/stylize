@@ -9,10 +9,3 @@ exportDestination: '/export/patterns'
 
 plugins:
   stylize-handlebars:
-  # stylize-mustache:
-  # stylizer.getPatterns:
-  # stylizer.patternData:
-  # stylize-drupalexport:
-  # sassColors/sassColors:
-  #   settings:
-  #     file: './_colors.scss'
