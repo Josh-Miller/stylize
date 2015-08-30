@@ -21,7 +21,7 @@ describe('Stylize CLI', function () {
   });
 
   describe('export', function() {
-    it('should run export',function(){
+    it('should run export', function(){
       var cliExport = require('../lib/export');
 
       cliExport.run(__dirname, function(err) {
