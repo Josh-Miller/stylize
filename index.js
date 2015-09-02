@@ -10,6 +10,15 @@ var program = require('commander'),
     stylizeRegression = require('stylize-regression'),
     chalk = require('chalk');
 
+// CLI
+var cliCompile = require('./lib/compile'),
+    cliExport = require('./lib/export'),
+    cliInit = require('./lib/init'),
+    cliBuild = require('./lib/build');
+
+var log = console.log.bind(console);
+var cmdPath = process.cwd();
+
 // Watch patterns
 var watch = function() {
   log(chalk.green('Watching'));
@@ -20,34 +29,37 @@ var watch = function() {
     ignored: /[\/\\]\./,
   });
 
-  watcher.on('change', function(path, stats) {
+  cliCompile.run(function() {
+    log(chalk.green('Fin'));
+  });
 
-    cliCompile.singlePattern(path, function(fileName) {
-      log(chalk.cyan('Updated', fileName));
-    });
+  watcher.on('change', function(path, stats) {
+    var pathArr = path.split('/');
+    var fileArr = pathArr[pathArr.length - 1].split('.');
+    var fileSuffix = fileArr[fileArr.length - 1];
+
+    if (fileSuffix === 'yml') {
+      console.log(chalk.cyan('Updated', fileArr));
+      cliCompile.run(function() {
+        log(chalk.green('Fin'));
+      });
+    } else {
+      cliCompile.singlePattern(path, function(fileName) {
+        log(chalk.cyan('Updated', fileName));
+      });
+    }
+
   });
 
   watcher.on('add', function(path, stats) {
-    cliBuild.run();
-    cliCompile.run(function() {
-      log(chalk.green('Fin'));
+    cliCompile.singlePattern(path, function(fileName) {
+      log(chalk.cyan('Added', fileName));
     });
-    log(chalk.cyan('Added', path));
   });
 }
 
-// CLI
-var cliCompile = require('./lib/compile'),
-    cliExport = require('./lib/export'),
-    cliInit = require('./lib/init'),
-    cliBuild = require('./lib/build');
-
-var log = console.log.bind(console);
-
 program
-  .version('0.0.1')
-  .option('-b, --build', 'Build app')
-  .option('-e, --export', 'Export patterns');
+  .version('0.0.1');
 
 program
   .command('init [env]')
@@ -68,7 +80,7 @@ program
     if (mode) {
       watch();
     } else {
-      cliCompile.run(function() {
+      cliCompile.run(cmdPath, function() {
         log(chalk.green('Fin'));
       });
     }
@@ -88,8 +100,8 @@ program
   .alias('r')
   .description('Run regression test')
   .action(function() {
-    var path = process.cwd();
-    stylizeRegression.get(function(patterns) {
+    var cmdPath = process.cwd();
+    stylizeRegression.get(cmdPath, function(patterns) {
       stylizeRegression.takeScreenshot(patterns);
     });
   });
@@ -99,7 +111,7 @@ program
   .alias('e')
   .description('Export patterns')
   .action(function() {
-    cliExport.run(function() {
+    cliExport.run(cmdPath, function() {
       log(chalk.green('Fin'));
     });
   });
