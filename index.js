@@ -29,7 +29,7 @@ var watch = function() {
     ignored: /[\/\\]\./,
   });
 
-  cliCompile.run(function() {
+  cliCompile.run(cmdPath, function() {
     log(chalk.green('Fin'));
   });
 
@@ -40,7 +40,7 @@ var watch = function() {
 
     if (fileSuffix === 'yml') {
       console.log(chalk.cyan('Updated', fileArr));
-      cliCompile.run(function() {
+      cliCompile.run(cmdPath, function() {
         log(chalk.green('Fin'));
       });
     } else {
