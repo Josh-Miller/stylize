@@ -8,7 +8,8 @@ var program = require('commander'),
     chokidar = require('chokidar'),
     childProcess = require('child_process'),
     stylizeRegression = require('stylize-regression'),
-    chalk = require('chalk');
+    chalk = require('chalk'),
+    path = require('path');
 
 // CLI
 var cliCompile = require('./lib/compile'),
@@ -17,13 +18,13 @@ var cliCompile = require('./lib/compile'),
     cliBuild = require('./lib/build');
 
 var log = console.log.bind(console);
-var cmdPath = process.cwd();
+var projectPath = process.cwd();
 
 // Watch patterns
-var watch = function() {
+var watch = function(watchDir) {
   log(chalk.green('Watching'));
-  var path = process.cwd();
-  var watcher = chokidar.watch(path + '/src', {
+  var cmdPath = process.cwd();
+  var watcher = chokidar.watch(cmdPath + '/src', {
     usePolling: true,
     persistent: true,
     ignored: /[\/\\]\./,
@@ -74,13 +75,19 @@ program
   .alias('c')
   .description('Compile patterns')
   .option('-w, --watch', 'Watch and compile patterns on change')
+  .option('-p, --path [value]', 'Set the path to your Stylize project root')
   .action(function(env, options) {
     var mode = options.watch || false;
 
     if (mode) {
-      watch();
+      var watchDir = {};
+      watch(watchDir);
     } else {
-      cliCompile.run(cmdPath, function() {
+      if (options.path) {
+        projectPath = path.join(process.cwd(), options.path);
+      }
+
+      cliCompile.run(projectPath, function() {
         log(chalk.green('Fin'));
       });
     }
@@ -99,9 +106,13 @@ program
   .command('regression [env]')
   .alias('r')
   .description('Run regression test')
-  .action(function() {
-    var cmdPath = process.cwd();
-    stylizeRegression.get(cmdPath, function(patterns) {
+  .option('-p, --path [value]', 'Set the path to your Stylize project root')
+  .action(function(env, options) {
+    if (options.path) {
+      projectPath = path.join(process.cwd(), options.path);
+    }
+
+    stylizeRegression.get(projectPath, function(patterns) {
       stylizeRegression.takeScreenshot(patterns);
     });
   });
@@ -110,8 +121,16 @@ program
   .command('export [env]')
   .alias('e')
   .description('Export patterns')
-  .action(function() {
-    cliExport.run(cmdPath, function() {
+  .option('-o, --output [value]', 'Specify an output path')
+  .option('-p, --path [value]', 'Set the path to your Stylize project root')
+  .action(function(env, options) {
+    var output = options.output || false;
+
+    if (options.path) {
+      projectPath = path.join(process.cwd(), options.path);
+    }
+
+    cliExport.run(projectPath, function() {
       log(chalk.green('Fin'));
     });
   });
