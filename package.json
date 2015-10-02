@@ -31,7 +31,7 @@
     "gulp": "^3.9.0",
     "lodash": "^3.10.0",
     "stylize-core": "https://github.com/Josh-Miller/stylize-core",
-    "stylizer-front-end": "https://github.com/AtenDesignGroup/stylizer-front-end",
+    "stylize-front-end": "https://github.com/AtenDesignGroup/stylize-front-end",
     "yeoman-environment": "^1.2.7",
     "stylize-regression": "^0.0.0"
   },
