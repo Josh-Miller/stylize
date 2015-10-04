@@ -20,7 +20,7 @@
   ],
   "repository": "Josh-Miller/stylize",
   "bin": {
-    "stylize": "index.js"
+    "stylize": "cli.js"
   },
   "dependencies": {
     "chalk": "^1.1.0",
@@ -33,7 +33,7 @@
     "stylize-core": "https://github.com/Josh-Miller/stylize-core",
     "stylizer-front-end": "https://github.com/AtenDesignGroup/stylizer-front-end",
     "yeoman-environment": "^1.2.7",
-    "stylize-regression": "^0.0.0"
+    "stylize-regression": "https://github.com/Josh-Miller/stylize-regression"
   },
   "devDependencies": {
     "chai": "^3.2.0",
