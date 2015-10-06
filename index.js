@@ -23,12 +23,14 @@ var Stylize = function() {
   };
 
   this.export = function(projectPath) {
+    projectPath = path.join(process.cwd(), projectPath);
     cliExport.run(projectPath, function() {
       log(chalk.green('Fin'));
     });
   };
 
   this.regression = function(projectPath) {
+    projectPath = path.join(process.cwd(), projectPath);
     stylizeRegression.get(projectPath, function(patterns) {
       stylizeRegression.takeScreenshot(patterns);
     });
