@@ -9,7 +9,8 @@ var program = require('commander'),
     childProcess = require('child_process'),
     stylizeRegression = require('stylize-regression'),
     chalk = require('chalk'),
-    path = require('path');
+    path = require('path'),
+    stylize = require('./index');
 
 // CLI
 var cliCompile = require('./lib/compile'),
@@ -121,7 +122,7 @@ program
       if (options.output) {
         params.output = options.output;
       }
-console.log('projectPath', projectPath);
+
       cliCompile.run(params, function() {
         log(chalk.green('Fin'));
       });
