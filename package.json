@@ -30,10 +30,10 @@
     "generator-stylize": "https://github.com/Josh-Miller/generator-stylize",
     "gulp": "^3.9.0",
     "lodash": "^3.10.0",
-    "stylize-core": "https://github.com/Josh-Miller/stylize-core",
+    "stylize-core": "^0.0.2",
     "stylize-front-end": "https://github.com/AtenDesignGroup/stylize-front-end",
     "yeoman-environment": "^1.2.7",
-    "stylize-regression": "https://github.com/Josh-Miller/stylize-regression"
+    "stylize-regression": "^0.0.0"
   },
   "devDependencies": {
     "chai": "^3.2.0",
