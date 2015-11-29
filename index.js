@@ -1,18 +1,16 @@
 'use strict';
 
-var _ = require('lodash'),
-    stylizeRegression = require('stylize-regression'),
-    chalk = require('chalk'),
-    path = require('path');
+var stylizeRegression = require('stylize-regression'),
+  chalk = require('chalk'),
+  path = require('path');
 
 // CLI
 var cliCompile = require('./lib/compile'),
-    cliExport = require('./lib/export'),
-    cliInit = require('./lib/init'),
-    cliBuild = require('./lib/build');
+  cliExport = require('./lib/export'),
+  cliInit = require('./lib/init'),
+  cliBuild = require('./lib/build');
 
 var log = console.log.bind(console);
-var projectPath = process.cwd();
 
 var Stylize = function() {
   this.compile = function(params) {

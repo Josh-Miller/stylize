@@ -3,14 +3,14 @@
 'use strict';
 
 var program = require('commander'),
-    _ = require('lodash'),
-    fs = require('fs-extra'),
-    chokidar = require('chokidar'),
-    childProcess = require('child_process'),
-    stylizeRegression = require('stylize-regression'),
-    chalk = require('chalk'),
-    path = require('path'),
-    stylize = require('./index');
+  _ = require('lodash'),
+  fs = require('fs-extra'),
+  chokidar = require('chokidar'),
+  childProcess = require('child_process'),
+  stylizeRegression = require('stylize-regression'),
+  chalk = require('chalk'),
+  path = require('path'),
+  stylize = require('./index');
 
 // CLI
 var cliCompile = require('./lib/compile'),
@@ -32,8 +32,8 @@ var watch = function(params) {
   });
 
   var compileParams = {
-    projectPath: cmdPath,
-  }
+    projectPath: cmdPath
+  };
   if (params.output) {
     compileParams.output = params.output;
   }
@@ -54,8 +54,8 @@ var watch = function(params) {
       });
     } else {
       var singlePatternParams = {
-        file: path,
-      }
+        file: path
+      };
       if (params.output) {
         singlePatternParams.output = params.output;
       }
@@ -68,8 +68,8 @@ var watch = function(params) {
 
   watcher.on('add', function(path, stats) {
     var singlePatternParams = {
-      file: path,
-    }
+      file: path
+    };
     if (params.output) {
       singlePatternParams.output = params.output;
     }
@@ -77,7 +77,7 @@ var watch = function(params) {
       log(chalk.cyan('Added', fileName));
     });
   });
-}
+};
 
 program
   .version('0.0.1');
